@@ -30,8 +30,10 @@ plugins:
     allowDirectPlaylistIds: true
     clients:
       - ANDROID_MUSIC
-      - WEB_REMIX
-      - WEB
+      - MUSIC
+    oauth:
+      enabled: true
+      skipInitialization: true
   lavasrc:
     providers:
       - 'ytsearch:%QUERY%'
