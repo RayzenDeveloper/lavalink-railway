@@ -28,10 +28,10 @@ plugins:
     allowSearch: true
     allowDirectVideoIds: true
     allowDirectPlaylistIds: true
-    clients:
+clients:
+      - WEB_REMIX
       - TVHTML5_SIMPLY
       - WEB
-      - ANDROID_VR
     oauth:
       enabled: true
       skipInitialization: true
