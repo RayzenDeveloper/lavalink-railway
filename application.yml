@@ -30,7 +30,7 @@ plugins:
     allowDirectPlaylistIds: true
     clients:
       - ANDROID_MUSIC
-      - MUSIC
+      - WEB_REMIX
       - WEB
   lavasrc:
     providers:
