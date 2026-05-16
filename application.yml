@@ -1,0 +1,43 @@
+server:
+  port: 2333
+  address: 0.0.0.0
+
+plugins:
+  youtube:
+    enabled: true
+    allowSearch: true
+    allowDirectVideoIds: true
+    allowDirectPlaylistIds: true
+    clients:
+      - ANDROID_MUSIC
+      - MUSIC
+      - WEB
+  lavasrc:
+    providers:
+      - 'ytsearch:%QUERY%'
+      - 'scsearch:%QUERY%'
+    sources:
+      spotify: false
+      applemusic: false
+      deezer: false
+      yandexmusic: false
+
+lavalink:
+  server:
+    password: "rayzendeveloper"
+    sources:
+      youtube: false
+      soundcloud: true
+      bandcamp: true
+      twitch: true
+      vimeo: true
+      http: true
+      local: false
+    bufferDurationMs: 400
+    frameBufferDurationMs: 5000
+    soundcloudSearchEnabled: true
+
+logging:
+  level:
+    root: INFO
+    lavalink: INFO
