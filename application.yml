@@ -2,6 +2,26 @@ server:
   port: 2333
   address: 0.0.0.0
 
+lavalink:
+  plugins:
+    - dependency: "dev.lavalink.youtube:youtube-plugin:1.16.0"
+      repository: "https://maven.lavalink.dev/releases"
+    - dependency: "com.github.topi314.lavasrc:lavasrc-plugin:4.3.0"
+      repository: "https://maven.lavalink.dev/releases"
+  server:
+    password: "rayzendeveloper"
+    sources:
+      youtube: false
+      soundcloud: true
+      bandcamp: true
+      twitch: true
+      vimeo: true
+      http: true
+      local: false
+    bufferDurationMs: 400
+    frameBufferDurationMs: 5000
+    soundcloudSearchEnabled: true
+
 plugins:
   youtube:
     enabled: true
@@ -21,21 +41,6 @@ plugins:
       applemusic: false
       deezer: false
       yandexmusic: false
-
-lavalink:
-  server:
-    password: "rayzendeveloper"
-    sources:
-      youtube: false
-      soundcloud: true
-      bandcamp: true
-      twitch: true
-      vimeo: true
-      http: true
-      local: false
-    bufferDurationMs: 400
-    frameBufferDurationMs: 5000
-    soundcloudSearchEnabled: true
 
 logging:
   level:
