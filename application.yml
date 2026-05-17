@@ -38,7 +38,7 @@ plugins:
       - ANDROID_VR
     oauth:
       enabled: true
-      skipInitialization: false
+      skipInitialization: true
       refreshToken: "1//09KchBAJBXRWfCgYIARAAGAkSNwF-L9IrgWfcj-RGy1_rybQB6Kz9zUbmoD7a6-1pbgyKETq0jQv_CdAEDV09UN93Qk7XCBG5v7g"
     remoteCipher:
       url: "https://cipher.kikkia.dev/"
