@@ -18,9 +18,13 @@ lavalink:
       vimeo: true
       http: true
       local: false
-    bufferDurationMs: 400
-    frameBufferDurationMs: 5000
+    bufferDurationMs: 800
+    frameBufferDurationMs: 10000
     soundcloudSearchEnabled: true
+    timeouts:
+      connectTimeoutMs: 10000
+      connectionRequestTimeoutMs: 10000
+      socketTimeoutMs: 10000
 
 plugins:
   youtube:
