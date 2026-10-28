@@ -32,12 +32,8 @@ plugins:
     allowSearch: true
     allowDirectVideoIds: true
     allowDirectPlaylistIds: true
-
     clients:
-      - ANDROID_MUSIC
-      - MUSIC
       - WEB
-
     oauth:
       enabled: false
 
