@@ -1,4 +1,3 @@
-
 server:
   port: ${SERVER_PORT:2333}
   address: 0.0.0.0
@@ -7,24 +6,32 @@ lavalink:
   plugins:
     - dependency: "dev.lavalink.youtube:youtube-plugin:1.18.2"
       repository: "https://maven.lavalink.dev/releases"
-
-    - dependency: "com.github.topi314.lavasrc:lavasrc-plugin:4.3.0"
+    - dependency: "com.github.topi314.lavasrc:lavasrc-plugin:4.8.3"
       repository: "https://maven.lavalink.dev/releases"
 
   server:
+    # mot de passe lu depuis la variable Railway LAVALINK_SERVER_PASSWORD (ne plus l'écrire ici : le dépôt est public)
     password: ${LAVALINK_SERVER_PASSWORD}
 
     sources:
-      youtube: false
+      youtube: false        # remplacé par le plugin youtube ci-dessous
       soundcloud: true
       bandcamp: true
       twitch: true
       vimeo: true
-      http: true
+      http: true            # radios / flux directs
       local: false
 
     bufferDurationMs: 400
     frameBufferDurationMs: 5000
+    trackStuckThresholdMs: 10000
+    playerUpdateInterval: 5
+    youtubePlaylistLoadLimit: 6     # pages de 100 → playlists jusqu'à 600 titres
+    opusEncodingQuality: 10
+    resamplingQuality: HIGH
+    useSeekGhosting: true
+    soundcloud:
+      filterPreviewTracks: true     # pas d'extraits de 30 s
 
 plugins:
   youtube:
@@ -32,18 +39,31 @@ plugins:
     allowSearch: true
     allowDirectVideoIds: true
     allowDirectPlaylistIds: true
+    # Essayés dans l'ordre : si l'un est bloqué par YouTube, le suivant prend le relais.
+    # MUSIC sert à la recherche (ytmsearch), pas à la lecture. TV ne lit qu'avec OAuth.
     clients:
+      - MUSIC
+      - ANDROID_VR
       - WEB
+      - WEBEMBEDDED
+      - TVHTML5_SIMPLY
+      - TV
     oauth:
-      enabled: false
+      # Connexion avec un compte Google JETABLE (jamais ton compte perso) :
+      # évite « Sign in to confirm you're not a bot » sur les IP d'hébergeur.
+      enabled: true
+      # Étape 2 : une fois le jeton affiché dans les logs, décommente les 2 lignes suivantes
+      # et crée la variable Railway YOUTUBE_REFRESH_TOKEN avec ce jeton.
+      # refreshToken: ${YOUTUBE_REFRESH_TOKEN}
+      # skipInitialization: true
 
   lavasrc:
     providers:
       - 'ytsearch:"%ISRC%"'
       - 'ytsearch:%QUERY%'
-
+      - 'scsearch:%QUERY%'
     sources:
-      spotify: false
+      spotify: false        # le bot convertit déjà les liens Spotify tout seul
       applemusic: false
       deezer: false
       yandexmusic: false
@@ -52,3 +72,5 @@ logging:
   level:
     root: INFO
     lavalink: INFO
+    # affiche le code de connexion Google et le refresh token
+    dev.lavalink.youtube.http.YoutubeOauth2Handler: INFO
