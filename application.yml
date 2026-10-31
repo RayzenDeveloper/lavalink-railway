@@ -4,8 +4,11 @@ server:
 
 lavalink:
   plugins:
-    - dependency: "dev.lavalink.youtube:youtube-plugin:1.18.2"
-      repository: "https://maven.lavalink.dev/releases"
+    # build de développement : contient le correctif du client TV (PR #233) et du déchiffrement (#245),
+    # pas encore publiés en version stable. Repasser sur une version stable dès que la 1.19 sort.
+    - dependency: "dev.lavalink.youtube:youtube-plugin:2be8e542d3f6f178e048dca565892684c2e40177"
+      repository: "https://maven.lavalink.dev/snapshots"
+      snapshot: true
     - dependency: "com.github.topi314.lavasrc:lavasrc-plugin:4.8.3"
       repository: "https://maven.lavalink.dev/releases"
 
@@ -43,11 +46,12 @@ plugins:
     # MUSIC sert à la recherche (ytmsearch), pas à la lecture. TV ne lit qu'avec OAuth.
     clients:
       - MUSIC
-      - ANDROID_VR
       - WEB
-      - WEBEMBEDDED
-      - TVHTML5_SIMPLY
       - TV
+      - IOS
+      - TVHTML5_SIMPLY
+      - ANDROID_VR
+      - WEBEMBEDDED
     oauth:
       # Connexion avec un compte Google JETABLE (jamais ton compte perso) :
       # évite « Sign in to confirm you're not a bot » sur les IP d'hébergeur.
