@@ -56,6 +56,11 @@ plugins:
       # et crée la variable Railway YOUTUBE_REFRESH_TOKEN avec ce jeton.
       refreshToken: ${YOUTUBE_REFRESH_TOKEN}
       skipInitialization: true
+    # Déchiffrement des signatures YouTube (obligatoire pour le client TV / OAuth).
+    # Instance publique gratuite ; à héberger soi-même au-delà de ~1000 lecteurs.
+    remoteCipher:
+      url: "https://cipher.kikkia.dev/"
+      userAgent: "rayzen-bot"
 
   lavasrc:
     providers:
