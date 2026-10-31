@@ -54,8 +54,8 @@ plugins:
       enabled: true
       # Étape 2 : une fois le jeton affiché dans les logs, décommente les 2 lignes suivantes
       # et crée la variable Railway YOUTUBE_REFRESH_TOKEN avec ce jeton.
-      # refreshToken: ${YOUTUBE_REFRESH_TOKEN}
-      # skipInitialization: true
+      refreshToken: ${YOUTUBE_REFRESH_TOKEN}
+      skipInitialization: true
 
   lavasrc:
     providers:
