@@ -4,8 +4,6 @@ server:
 
 lavalink:
   plugins:
-    # build de développement : contient le correctif du client TV (PR #233) et du déchiffrement (#245),
-    # pas encore publiés en version stable. Repasser sur une version stable dès que la 1.19 sort.
     - dependency: "dev.lavalink.youtube:youtube-plugin:2be8e542d3f6f178e048dca565892684c2e40177"
       repository: "https://maven.lavalink.dev/snapshots"
       snapshot: true
@@ -13,28 +11,27 @@ lavalink:
       repository: "https://maven.lavalink.dev/releases"
 
   server:
-    # mot de passe lu depuis la variable Railway LAVALINK_SERVER_PASSWORD (ne plus l'écrire ici : le dépôt est public)
     password: ${LAVALINK_SERVER_PASSWORD}
 
     sources:
-      youtube: false        # remplacé par le plugin youtube ci-dessous
+      youtube: false
       soundcloud: true
       bandcamp: true
       twitch: true
       vimeo: true
-      http: true            # radios / flux directs
+      http: true
       local: false
 
     bufferDurationMs: 400
     frameBufferDurationMs: 5000
     trackStuckThresholdMs: 10000
     playerUpdateInterval: 5
-    youtubePlaylistLoadLimit: 6     # pages de 100 → playlists jusqu'à 600 titres
+    youtubePlaylistLoadLimit: 6
     opusEncodingQuality: 10
     resamplingQuality: HIGH
     useSeekGhosting: true
     soundcloud:
-      filterPreviewTracks: true     # pas d'extraits de 30 s
+      filterPreviewTracks: true
 
 plugins:
   youtube:
@@ -42,8 +39,7 @@ plugins:
     allowSearch: true
     allowDirectVideoIds: true
     allowDirectPlaylistIds: true
-    # Essayés dans l'ordre : si l'un est bloqué par YouTube, le suivant prend le relais.
-    # MUSIC sert à la recherche (ytmsearch), pas à la lecture. TV ne lit qu'avec OAuth.
+
     clients:
       - MUSIC
       - WEB
@@ -53,15 +49,12 @@ plugins:
       - ANDROID_VR
       - WEBEMBEDDED
     oauth:
-      # Connexion avec un compte Google JETABLE (jamais ton compte perso) :
-      # évite « Sign in to confirm you're not a bot » sur les IP d'hébergeur.
+
       enabled: true
-      # Étape 2 : une fois le jeton affiché dans les logs, décommente les 2 lignes suivantes
-      # et crée la variable Railway YOUTUBE_REFRESH_TOKEN avec ce jeton.
+
       refreshToken: ${YOUTUBE_REFRESH_TOKEN}
       skipInitialization: true
-    # Déchiffrement des signatures YouTube (obligatoire pour le client TV / OAuth).
-    # Instance publique gratuite ; à héberger soi-même au-delà de ~1000 lecteurs.
+
     remoteCipher:
       url: "https://cipher.kikkia.dev/"
       userAgent: "rayzen-bot"
@@ -72,7 +65,7 @@ plugins:
       - 'ytsearch:%QUERY%'
       - 'scsearch:%QUERY%'
     sources:
-      spotify: false        # le bot convertit déjà les liens Spotify tout seul
+      spotify: false 
       applemusic: false
       deezer: false
       yandexmusic: false
@@ -81,5 +74,5 @@ logging:
   level:
     root: INFO
     lavalink: INFO
-    # affiche le code de connexion Google et le refresh token
+    
     dev.lavalink.youtube.http.YoutubeOauth2Handler: INFO
